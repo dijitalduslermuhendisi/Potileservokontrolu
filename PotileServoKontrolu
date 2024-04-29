@@ -1,0 +1,24 @@
+#include <Servo.h>
+
+// Potansiyometrenin bağlı olduğu pin
+const int potPin = A0;
+// Servo motorun bağlı olduğu pin
+const int servoPin = 9;
+
+Servo servoMotor;
+
+void setup() {
+  // Servo motoru pinini çıkış olarak ayarla
+  servoMotor.attach(servoPin);
+}
+
+void loop() {
+  // Potansiyometrenin değerini oku (0-1023 arası)
+  int potValue = analogRead(potPin);
+  // Potansiyometre değerini 0-180 aralığına dönüştür
+  int angle = map(potValue, 0, 1023, 0, 180);
+  // Servo motorun açısını ayarla
+  servoMotor.write(angle);
+  // Kısa bir gecikme ekle
+  delay(15);
+}
